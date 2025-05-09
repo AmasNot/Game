@@ -12013,3 +12013,54 @@ for _, v in pairs(resultNormal) do
 	end;
 end;
 print("Script Loaded!");
+local JobID = ""
+
+-- Tạo khung GUI đơn giản
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 250, 0, 60)
+Frame.Position = UDim2.new(0.5, -125, 1, -150) -- Lên cao hơn, cách mép dưới 150 pixels
+Frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Frame.BorderSizePixel = 2
+Frame.BorderColor3 = Color3.fromRGB(0, 170, 255) -- Viền xanh neon
+Frame.Parent = ScreenGui
+
+-- Thêm hiệu ứng góc bo
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0, 8)
+UICorner.Parent = Frame
+
+local TextBox = Instance.new("TextBox")
+TextBox.Size = UDim2.new(1, -10, 1, -10)
+TextBox.Position = UDim2.new(0, 5, 0, 5)
+TextBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50) -- Sáng hơn để không quá đen
+TextBox.TextColor3 = Color3.fromRGB(255, 255, 255) -- Chữ trắng cho rõ
+TextBox.PlaceholderText = "Enter Job ID..."
+TextBox.PlaceholderColor3 = Color3.fromRGB(150, 150, 150) -- Placeholder xám nhẹ
+TextBox.Text = ""
+TextBox.Font = Enum.Font.Gotham -- Font hiện đại hơn
+TextBox.TextSize = 18
+TextBox.ClearTextOnFocus = false
+TextBox.Parent = Frame
+
+-- Thêm góc bo cho TextBox
+local TextBoxCorner = Instance.new("UICorner")
+TextBoxCorner.CornerRadius = UDim.new(0, 6)
+TextBoxCorner.Parent = TextBox
+
+-- Thêm hiệu ứng glow nhẹ cho TextBox
+local UIStroke = Instance.new("UIStroke")
+UIStroke.Thickness = 1
+UIStroke.Color = Color3.fromRGB(0, 170, 255) -- Glow xanh neon
+UIStroke.Transparency = 0.5
+UIStroke.Parent = TextBox
+
+-- Hàm xử lý khi nhập Job ID
+TextBox:GetPropertyChangedSignal("Text"):Connect(function()
+    JobID = TextBox.Text
+    if JobID ~= "" then
+        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, JobID, game.Players.LocalPlayer)
+    end
+end)
