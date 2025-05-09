@@ -2349,7 +2349,7 @@ spawn(function()
 	end;
 end);
 MainTab:Button("Copy Discord Link", function()
-	setclipboard("https://discord.com/invite/6J7faueCGa");
+	setclipboard("https://discord.gg/WuBsv4E2ND");
 	Update:Notify("Copied!", 3);
 end);
 MainTab:Seperator("Level Farm");
